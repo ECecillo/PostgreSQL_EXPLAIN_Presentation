@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   # Trigger the workflow when a push is made to any branch
   push:
+    branches: ["main"]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -32,4 +33,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
