@@ -1,7 +1,56 @@
 ---
 import Slide from '../components/Slide.astro';
+
+const summaryLinks = [
+	{
+		title: '📝 Le Planner et les enjeux de performance',
+		link: '#2',
+	},
+	{
+		title: '📏 La commande EXPLAIN ?',
+		link: '#3',
+		subcontent: [
+			{
+				title: 'Comment ça marche ?',
+				link: '#4',
+			},
+			{
+				title: "A quoi ça sert et comment s'en servir ?",
+				link: '#5',
+			},
+		],
+	},
+	{
+		title: "🔍 L'optimizer dans tous ça ?",
+		link: '#6',
+	},
+];
 ---
 
 <Slide>
-  <h3>Sommaire</h1>
+	<div
+		style="display: flex; flex-direction: column; justify-items: center; align-items: center;"
+	>
+		<h3>- Sommaire -</h3>
+		<div style="text-align: center;">
+			<ol>
+				{
+					summaryLinks.map((link) => (
+						<li>
+							<a href={link.link}>{link.title}</a>
+							{link.subcontent && (
+								<ol>
+									{link.subcontent.map((sublink) => (
+										<li>
+											<a href={sublink.link}>{sublink.title}</a>
+										</li>
+									))}
+								</ol>
+							)}
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</div>
 </Slide>
