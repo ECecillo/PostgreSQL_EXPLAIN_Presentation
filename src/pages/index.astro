@@ -1,24 +1,29 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Summary from "../slides/Summary.astro";
-import Title from "../slides/Title.astro";
-import WhyAstro from "../slides/WhyAstro.astro";
+import Layout from '../layouts/Layout.astro';
+import QueryPlannerPart1 from '../slides/QueryPlannerPart1.astro';
+import QueryPlannerPart2 from '../slides/QueryPlannerPart2.astro';
+import Ressources from '../slides/Ressources.astro';
+import Summary from '../slides/Summary.astro';
+import Title from '../slides/Title.astro';
+import WhyAstro from '../slides/WhyAstro.astro';
 ---
 
-<Layout title="My Awesome Talk Title">
-  <main class="reveal">
-    <div class="slides">
-      <Title />
-      <Summary />
-      <WhyAstro />
-      <!-- Put your slides here -->
-    </div>
-  </main>
+<Layout title="ECecillo | EXPLAIN/OPTIMIZER">
+	<main class="reveal">
+		<div class="slides">
+			<Title />
+			<Summary />
+			<QueryPlannerPart1 />
+			<QueryPlannerPart2 />
+			<Ressources />
+			<WhyAstro />
+		</div>
+	</main>
 </Layout>
 
 <style lang="scss">
-  // Sass is installed by default, you can change if you prefer Stylus or Less
-  main {
-    background: linear-gradient(#133055, #0c1a2a);
-  }
+	// Sass is installed by default, you can change if you prefer Stylus or Less
+	main {
+		background: linear-gradient(#133055, #0c1a2a);
+	}
 </style>

@@ -1,0 +1,12 @@
+---
+import { Image } from 'astro:assets';
+import Slide from '../components/Slide.astro';
+
+const plannerSchema = '/src/assets/planner-part1.webp';
+const plannerSchemaText = 'Schéma du planner';
+---
+
+<Slide>
+	<h4>🧳 Le Chemin d'une requête dans une base de données PostgreSQL</h3>
+	<Image src={plannerSchema} alt={plannerSchemaText} width={2000} height={150} />
+</Slide>

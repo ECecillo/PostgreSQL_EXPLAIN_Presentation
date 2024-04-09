@@ -5,6 +5,7 @@ import Slide from '../components/Slide.astro';
 
 const altText = 'PostgreSQL';
 const path = '/src/assets/postgresql.webp';
+const variantTextColor = 'color: cornflowerblue;';
 ---
 
 <Slide>
@@ -14,5 +15,7 @@ const path = '/src/assets/postgresql.webp';
 		<Image src={path} alt={altText} width={100} height={100} />
 		<h2>PostgreSQL</h2>
 	</div>
-	<p style="color: cornflowerblue; font-weight: bolder;">EXPLAIN et l'Optimiseur de requêtes</p>
+	<p style=`${variantTextColor} font-weight: bolder;`>
+		EXPLAIN et l'Optimiseur de requêtes
+	</p>
 </Slide>
