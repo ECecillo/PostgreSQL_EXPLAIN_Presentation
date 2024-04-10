@@ -2,6 +2,6 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://ececillo.github.io",
+	site: "http://ececillo.me",
 	base: "/PostgreSQL_EXPLAIN_Presentation",
 });
