@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import Slide from '../components/Slide.astro';
+
+const plannerSchema1 = '/src/assets/planner-part1.webp';
+const plannerSchemaText1 = 'Schéma du planner';
+
+const plannerSchema2 = '/src/assets/planner-part2.webp';
+const plannerSchemaText2 = 'Schéma du Planner 2';
+---
+
+<Slide>
+	<h4>👼 La vie d'une requête SQL</h4>
+	<Image
+		src={plannerSchema1}
+		alt={plannerSchemaText1}
+		width={1000}
+		height={150}
+	/>
+	<aside class="notes" data-markdown>
+		<textarea data-template>
+			# Rewriter
+
+			- Applique des transformations sur l'Arbre de Requête depuis
+			des règles ou définitions (modifie la requête pour qu'elle accède à une
+			certaine vue ... )
+
+		</textarea>
+	</aside>
+</Slide>
+
+<Slide>
+	<h4>👼 La vie d'une requête SQL</h4>
+	<Image
+		class="r-stretch"
+		src={plannerSchema2}
+		alt={plannerSchemaText2}
+		width={1}
+		height={1}
+	/>
+</Slide>
