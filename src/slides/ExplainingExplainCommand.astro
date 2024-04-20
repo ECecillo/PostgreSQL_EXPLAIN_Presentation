@@ -1,0 +1,24 @@
+---
+import Slide from '../components/Slide.astro';
+
+const sqlQueryPlanResultEXPLAINwithCost = `                       QUERY PLAN
+------------------------------------------------------------------------------
+ Nested Loop  										(cost=0.56..2761623.95 rows=36867792 width=14)
+   ->  Seq Scan on teams t  			(cost=0.00..5528.03 rows=44303 width=14)
+   ->  Materialize  							(cost=0.29..8.51 rows=10 width=244)
+     ->  Index Only Scan using index_players_on_team_id on players p
+		 															(cost=0.56..47.13 rows=1508 width=4)
+
+           Index Cond: (team_id = t.id)`;
+---
+
+<Slide>
+	<h3>📏 La commande EXPLAIN dans tous ça ?</h3>
+	<ul>
+		<li>
+			Les opérations de mutations (UPDATE, INSERT, DELETE) doivent être placées
+			dans des transactions et rollback.
+		</li>
+		<li></li>
+	</ul>
+</Slide>

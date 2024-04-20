@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import Slide from '../components/Slide.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+
+const queryPlanSchema = '/src/assets/query-plan-schema.webp';
+const queryPlanSchemaText = "Query Plan de la requête SQL d'exemple";
+
+const sqlQueryExample = `		---
+		CREATE INDEX index_players_on_team_id ON players(team_id);
+		---
+		SELECT p.name, t.name
+		FROM players p
+		JOIN teams t ON (t.id = p.team_id);`;
+
+const sqlQueryPlanResultEXPLAIN = `                       QUERY PLAN
+---------------------------------------------------------
+ Nested Loop
+   ->  Seq Scan on teams t
+   ->  Materialize
+     ->  Index Only Scan using index_players_on_team_id on players p
+           Index Cond: (team_id = t.id)`;
+---
+
+<Slide>
+	<h3>🔎 Un "Query Plan" c'est quoi ?</h3>
+</Slide>
+
+<Slide>
+	<h3>🔎 Un "Query Plan" c'est quoi ?</h3>
+	<CodeBlock lang="sql" lines="true">{sqlQueryExample}</CodeBlock>
+</Slide>
+
+<Slide>
+	<h3>🔎 Un "Query Plan" c'est quoi ?</h3>
+	<CodeBlock lang="sql" lines="2|4-6">{sqlQueryExample}</CodeBlock>
+</Slide>
+
+<Slide>
+	<h3>🔎 Un "Query Plan" c'est quoi ?</h3>
+	<CodeBlock lang="sql" lines="4,5,6|7|3"
+		>{sqlQueryPlanResultEXPLAIN}</CodeBlock
+	>
+	<aside class="notes" data-markdown>
+		<textarea data-template>
+			# Query Plan
+			- Est un arbre.
+			- Chaque branche est appelé un "plan node".
+			- Chaque "plan node" commence avec `->`.
+			- Les noeuds les plus bas dans l'arbre correspondent à la manière dont les tuples sont récupérés dans les tables.
+			- Les noeuds supérieurs sont des opérations réalisés sur les enfants.
+		</textarea>
+	</aside>
+</Slide>
+
+<Slide>
+	<Image
+		src={queryPlanSchema}
+		alt={queryPlanSchemaText}
+		class="r-stretch"
+		width={1}
+		height={1}
+	/>
+</Slide>
+
+<Slide>
+	<h3 class="special-text">Pour résumer</h3>
+	<ul>
+		<li>Un arbre</li>
+		<li>Chaque branche est appelé un "plan node".</li>
+		<li>Chaque "plan node" commence avec ->.</li>
+		<li>
+			Les noeuds les plus bas dans l'arbre correspondent à la manière dont les
+			tuples sont récupérés dans les tables.
+		</li>
+		<li>Les noeuds supérieurs sont des opérations réalisés sur les enfants.</li>
+	</ul>
+</Slide>

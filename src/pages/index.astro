@@ -1,11 +1,14 @@
 ---
+import Conclusion from '../slides/Conclusion.astro';
+import ExplainingExplainCommand from '../slides/ExplainingExplainCommand.astro';
+import LifeOfSqlQuery from '../slides/LifeOfSqlQuery.astro';
+import QueryPlan from '../slides/QueryPlan.astro';
+import QueryPlanner from '../slides/QueryPlanner.astro';
+
 import Layout from '../layouts/Layout.astro';
-import QueryPlannerPart1 from '../slides/QueryPlannerPart1.astro';
-import QueryPlannerPart2 from '../slides/QueryPlannerPart2.astro';
 import Ressources from '../slides/Ressources.astro';
 import Summary from '../slides/Summary.astro';
 import Title from '../slides/Title.astro';
-import WhyAstro from '../slides/WhyAstro.astro';
 ---
 
 <Layout title="ECecillo | EXPLAIN/OPTIMIZER">
@@ -13,10 +16,15 @@ import WhyAstro from '../slides/WhyAstro.astro';
 		<div class="slides">
 			<Title />
 			<Summary />
-			<QueryPlannerPart1 />
-			<QueryPlannerPart2 />
+
+			<LifeOfSqlQuery />
+			<QueryPlan />
+
+			<QueryPlanner />
+			<ExplainingExplainCommand />
+
+			<Conclusion />
 			<Ressources />
-			<WhyAstro />
 		</div>
 	</main>
 </Layout>

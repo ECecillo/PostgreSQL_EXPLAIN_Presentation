@@ -3,26 +3,25 @@ import Slide from '../components/Slide.astro';
 
 const summaryLinks = [
 	{
-		title: '📝 Le Planner et les enjeux de performance',
+		title: "👼 La vie d'une requête SQL",
 		link: '#2',
 	},
 	{
-		title: '📏 La commande EXPLAIN ?',
-		link: '#3',
-		subcontent: [
-			{
-				title: 'Comment ça marche ?',
-				link: '#4',
-			},
-			{
-				title: "A quoi ça sert et comment s'en servir ?",
-				link: '#5',
-			},
-		],
+		title: '🔎 Un "Query Plan" c\'est quoi ?',
+		link: '#4',
 	},
 	{
-		title: "🔍 L'optimizer dans tous ça ?",
-		link: '#6',
+		title: '📝 Le "Planner" et les enjeux de performance',
+		link: '#4',
+	},
+	{
+		title: '📏 La commande EXPLAIN dans tous ça ?',
+		link: '#5',
+		subcontent: [],
+	},
+	{
+		title: '🎯 Conclusion',
+		link: '#7',
 	},
 ];
 ---
@@ -36,12 +35,12 @@ const summaryLinks = [
 			<ol>
 				{
 					summaryLinks.map((link) => (
-						<li>
+						<li class="fragment" style="padding: 1rem;">
 							<a href={link.link}>{link.title}</a>
 							{link.subcontent && (
 								<ol>
 									{link.subcontent.map((sublink) => (
-										<li>
+										<li class="fragment">
 											<a href={sublink.link}>{sublink.title}</a>
 										</li>
 									))}

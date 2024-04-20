@@ -1,0 +1,37 @@
+---
+import Slide from '../components/Slide.astro';
+---
+
+<Slide>
+	<h3>📝 Le "Planner" et les enjeux de performance</h3>
+</Slide>
+<Slide>
+	<h3>📝 Le "Planner" et les enjeux de performance</h3>
+	<ol>
+		<li>
+			<p>
+				<b class="special-text"> Génère</b> tous <b class="special-text"
+					>les "query plans" possibles</b
+				> qui nous amène au résultat.
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong class="special-text">Calcule</strong> le <strong
+					class="special-text"
+					>coût approximatif de chaque path
+				</strong> et choisi le meilleur.
+			</p>
+		</li>
+	</ol>
+	<aside class="notes" data-markdown>
+		<textarea data-template>
+			# Génération des plans
+
+			- Les plans possibles sont déterminés selon les index disponibles.
+			- Un scan sequentiel est toujours créer.
+			- Selon les opérations d'aggrégations ou de jointures, on peut multiplier le nombre possible de plans.
+			- Les jointures par Loop, Hash, Merge sont possibles.
+		</textarea>
+	</aside>
+</Slide>
