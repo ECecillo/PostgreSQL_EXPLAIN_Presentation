@@ -20,6 +20,21 @@ const sqlQueryPlanResultEXPLAIN = `                       QUERY PLAN
    ->  Materialize
      ->  Index Only Scan using index_players_on_team_id on players p
            Index Cond: (team_id = t.id)`;
+
+const sideNotes = `
+# Query Plan
+- Est un arbre.
+- Chaque branche est appelé un "plan node".
+- Chaque "plan node" commence avec \`->\`.
+- Les noeuds les plus bas dans l'arbre correspondent à la manière dont les tuples sont récupérés dans les tables.
+- Les noeuds supérieurs sont des opérations réalisés sur les enfants.
+
+# Interprétation du plan
+- La requête va d'abord scanner la table "teams" (Seq Scan).
+- Ensuite, elle va scanner l'index "index_players_on_team_id" de la table "players" (Index Only Scan) selon les valeurs de "team_id" récupérées de la table "teams".
+- Stocker le résultat dans une table temporaire (Materialize).
+- Enfin, elle va faire une jointure entre les deux tables (Nested Loop).
+`;
 ---
 
 <Slide>
@@ -38,17 +53,10 @@ const sqlQueryPlanResultEXPLAIN = `                       QUERY PLAN
 
 <Slide>
 	<h3>🔎 Un "Query Plan" c'est quoi ?</h3>
-	<CodeBlock lang="sql" lines="4,5,6|7|3"
-		>{sqlQueryPlanResultEXPLAIN}</CodeBlock
-	>
+	<pre><code class="language-sql" data-line-numbers="4|6,7|5|3,4,5">{sqlQueryPlanResultEXPLAIN}</code></pre>
 	<aside class="notes" data-markdown>
 		<textarea data-template>
-			# Query Plan
-			- Est un arbre.
-			- Chaque branche est appelé un "plan node".
-			- Chaque "plan node" commence avec `->`.
-			- Les noeuds les plus bas dans l'arbre correspondent à la manière dont les tuples sont récupérés dans les tables.
-			- Les noeuds supérieurs sont des opérations réalisés sur les enfants.
+			{sideNotes}
 		</textarea>
 	</aside>
 </Slide>
@@ -64,15 +72,29 @@ const sqlQueryPlanResultEXPLAIN = `                       QUERY PLAN
 </Slide>
 
 <Slide>
-	<h3 class="special-text">Pour résumer</h3>
+	<h3 class="special-text">Pour résumer,<br /> un Query plan c'est :</h3>
 	<ul>
-		<li>Un arbre</li>
-		<li>Chaque branche est appelé un "plan node".</li>
-		<li>Chaque "plan node" commence avec ->.</li>
+		<li>Un <b class="special-text">arbre</b>.</li>
 		<li>
-			Les noeuds les plus bas dans l'arbre correspondent à la manière dont les
-			tuples sont récupérés dans les tables.
+			<b class="special-text">Chaque branche</b> est appelé un <b
+				class="special-text">"plan node"</b
+			>.
 		</li>
-		<li>Les noeuds supérieurs sont des opérations réalisés sur les enfants.</li>
+		<li>
+			Chaque <b class="special-text">"plan node"</b> commence avec <b
+				class="special-text">-></b
+			>.
+		</li>
+		<li>
+			Les <b class="special-text">noeuds les plus bas</b> dans l'arbre correspondent
+			à la manière dont les <b class="special-text"
+				>tuples sont récupérés dans les tables</b
+			>.
+		</li>
+		<li>
+			Les <b class="special-text">noeuds supérieurs</b> sont des <b
+				class="special-text">opérations</b
+			> réalisés sur les <b class="special-text">enfants</b>.
+		</li>
 	</ul>
 </Slide>

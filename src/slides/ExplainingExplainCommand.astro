@@ -1,24 +1,88 @@
 ---
+import CodeBlock from '../components/CodeBlock.astro';
 import Slide from '../components/Slide.astro';
 
 const sqlQueryPlanResultEXPLAINwithCost = `                       QUERY PLAN
 ------------------------------------------------------------------------------
- Nested Loop  										(cost=0.56..2761623.95 rows=36867792 width=14)
-   ->  Seq Scan on teams t  			(cost=0.00..5528.03 rows=44303 width=14)
-   ->  Materialize  							(cost=0.29..8.51 rows=10 width=244)
-     ->  Index Only Scan using index_players_on_team_id on players p
-		 															(cost=0.56..47.13 rows=1508 width=4)
+Nested Loop  										(cost=0.56..2761623.95 rows=36867792 width=14)
+  ->  Seq Scan on teams t  			(cost=0.00..5528.03 rows=44303 width=14)
+  ->  Materialize  							(cost=0.29..8.51 rows=10 width=244)
+    ->  Index Only Scan using index_players_on_team_id on players p
+		 														(cost=0.56..47.13 rows=1508 width=4)
+         Index Cond: (team_id = t.id)`;
 
-           Index Cond: (team_id = t.id)`;
+const transactionExample = `
+BEGIN
+	EXPLAIN ANALYSE
+		UPDATE players
+		SET team_id = 1
+		WHERE team_id = 2
+ROLLBACK;
+`;
+
+const sideNotes = `
+- Les valeurs de coût sont déterminés par les paramètres de coûts du Planner.
+- Une façon de mesurer ces coûts est de regarder le nombre d'accès aux blocs disques.
+- Le coût d'un noeud supérieur inclus le coût de tous ces enfants + le sien.
+`;
 ---
+
+<Slide>
+	<h3>📏 La commande EXPLAIN dans tous ça ?</h3>
+</Slide>
 
 <Slide>
 	<h3>📏 La commande EXPLAIN dans tous ça ?</h3>
 	<ul>
 		<li>
-			Les opérations de mutations (UPDATE, INSERT, DELETE) doivent être placées
-			dans des transactions et rollback.
+			<p>Retourne le "Query Plan" choisi par le Planner.</p>
 		</li>
-		<li></li>
+		<li>
+			<p>
+				Peut être une estimation ou le coût finale selon les options. (ANALYSE)
+			</p>
+		</li>
 	</ul>
+</Slide>
+
+<Slide>
+	<CodeBlock lang="sql">
+		{sqlQueryPlanResultEXPLAINwithCost}
+	</CodeBlock>
+	<aside class="notes" data-markdown>
+		<textarea data-template>
+			{sideNotes}
+		</textarea>
+	</aside>
+</Slide>
+<Slide>
+	<section style={{ display: 'flex', 'align-items': 'center' }}>
+		<pre>
+		<code class="langugage-sql">
+			(cost=0.56..2761623.95 rows=36867792 width=14)
+		</code>
+	</pre>
+		<ul>
+			<ul>
+				<li>
+					<p>
+						<b class="special-text">cost</b>: Intervalle entre start-up cost et
+						total cost.
+					</p>
+				</li>
+				<li>
+					<p>
+						<b class="special-text">rows</b>: Nombre de ligne émise par un plan
+						node.
+					</p>
+				</li>
+				<li>
+					<p>
+						<b class="special-text">width</b>: Moyenne des rows émis par les
+						plan node, en octect (bytes).
+					</p>
+				</li>
+			</ul>
+		</ul>
+	</section>
 </Slide>
